@@ -1,6 +1,5 @@
 'use client'
 
-import { Suspense } from 'react'
 import HeroSection from '@/components/sections/HeroSection'
 import TargetSelectorSection from '@/components/sections/TargetSelectorSection'
 import SocialChangeSection from '@/components/sections/SocialChangeSection'
@@ -15,9 +14,9 @@ import FlowSection from '@/components/sections/FlowSection'
 import FAQSection from '@/components/sections/FAQSection'
 import ClosingSection from '@/components/sections/ClosingSection'
 import Navigation from '@/components/Navigation'
-import { TargetProvider, useTarget } from '@/contexts/TargetContext'
+import { useTarget } from '@/contexts/TargetContext'
 
-function HomeContent() {
+export default function Home() {
   const { isSelected } = useTarget()
 
   return (
@@ -39,15 +38,5 @@ function HomeContent() {
         <ClosingSection />
       </main>
     </>
-  )
-}
-
-export default function Home() {
-  return (
-    <Suspense fallback={<div className="min-h-screen bg-base-white" />}>
-      <TargetProvider>
-        <HomeContent />
-      </TargetProvider>
-    </Suspense>
   )
 }

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter, Noto_Sans_JP } from 'next/font/google'
+import { Suspense } from 'react'
 import './globals.css'
+import { TargetProvider } from '@/contexts/TargetContext'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,6 +19,10 @@ const notoSansJp = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: 'Anker SOLIX XJ | 家庭用蓄電池',
   description: '2025年、住宅の「標準装備」が変わる。太陽光＋蓄電池は、これからの住宅に欠かせない設備です。',
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function RootLayout({
@@ -27,7 +33,11 @@ export default function RootLayout({
   return (
     <html lang="ja" className={`${inter.variable} ${notoSansJp.variable}`}>
       <body className="antialiased">
-        {children}
+        <Suspense fallback={<div className="min-h-screen bg-base-white" />}>
+          <TargetProvider>
+            {children}
+          </TargetProvider>
+        </Suspense>
       </body>
     </html>
   )
